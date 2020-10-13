@@ -17,12 +17,12 @@ public class control {
 
 	@RequestMapping("/h2")
 	public String result2(HttpServletRequest req, HttpServletResponse resp) {
-		return "redirect:/static/hh1.html";
+		return "redirect:/static/test.html";
 	}
 
 	@RequestMapping(value = "{q}")
 	public String result3(@PathVariable("q") String s) {
-		return "redirect:/static/hh1.html";
+		return "redirect:/static/test.html";
 	}
 
 }
