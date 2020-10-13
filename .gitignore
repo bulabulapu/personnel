@@ -1,6 +1,7 @@
 target
 out
 .vscode
+.cache
 !.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###
