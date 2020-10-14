@@ -12,7 +12,7 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private AdminDao iAdminDao;
 
-	public Admin getAdmin(int adminId) {
+	public Admin getAdmin(String adminId) {
 		return iAdminDao.getAdmin(adminId);
 	}
 

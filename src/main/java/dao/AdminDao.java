@@ -11,5 +11,5 @@ import model.Admin;
 public interface AdminDao {
 
 	@Select("select * from admin where adminId=#{adminId}")
-	public Admin getAdmin(int adminId);
+	public Admin getAdmin(String adminId);
 }

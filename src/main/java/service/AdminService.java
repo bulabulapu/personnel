@@ -4,5 +4,5 @@ import model.Admin;
 
 public interface AdminService {
 
-	public Admin getAdmin(int AdminId);
+	public Admin getAdmin(String AdminId);
 }
