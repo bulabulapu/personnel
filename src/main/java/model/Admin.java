@@ -5,17 +5,17 @@ package model;
  */
 public class Admin {
 	/* 管理员id */
-	private int adminId;
+	private String adminId;
 	/* 管理员账户名称 */
 	private String adminName;
 	/* 管理员账户密码 */
 	private String adminPWord;
 
-	public int getAdminId() {
+	public String getAdminId() {
 		return adminId;
 	}
 
-	public void setAdminId(int adminId) {
+	public void setAdminId(String adminId) {
 		this.adminId = adminId;
 	}
 

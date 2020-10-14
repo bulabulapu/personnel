@@ -3,9 +3,9 @@
 /* Created on:     2020/10/10 22:10:13                          */
 /*==============================================================*/
 
-CREATE DATABASE personel default character set = 'utf8';
+CREATE DATABASE personel_db default character set = 'utf8';
 
-use personel;
+use personel_db;
 
 drop table if exists Admin;
 
@@ -26,7 +26,7 @@ drop table if exists Staff;
 /*==============================================================*/
 create table Admin
 (
-   adminId              int not null auto_increment,
+   adminId              char(20) not null,
    adminName            char(20) not null,
    adminPWord           char(20) not null,
    primary key (adminId)
