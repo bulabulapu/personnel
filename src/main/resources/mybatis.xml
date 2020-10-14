@@ -5,12 +5,6 @@
 	<settings>
 		<setting name="logImpl" value="log4j" />
 	</settings>
-	
-	
-<!-- 设置mappers的类 -->
-	<mappers>
-		
-	</mappers>
-	
+
 </configuration>
 

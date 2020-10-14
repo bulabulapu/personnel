@@ -4,39 +4,40 @@ package model;
  * 管理员类
  */
 public class Admin {
-    /* 管理员id */
-    private int id;
-    /* 管理员账户名称 */
-    private String adminName;
-    /* 管理员账户密码 */
-    private String adminPassword;
+	/* 管理员id */
+	private int adminId;
+	/* 管理员账户名称 */
+	private String adminName;
+	/* 管理员账户密码 */
+	private String adminPWord;
 
-    public int getId() {
-        return id;
-    }
+	public int getAdminId() {
+		return adminId;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public void setAdminId(int adminId) {
+		this.adminId = adminId;
+	}
 
-    public String getAdminName() {
-        return adminName;
-    }
+	public String getAdminName() {
+		return adminName;
+	}
 
-    public void setAdminName(String adminName) {
-        this.adminName = adminName;
-    }
+	public void setAdminName(String adminName) {
+		this.adminName = adminName;
+	}
 
-    public String getAdminPassword() {
-        return adminPassword;
-    }
+	public String getAdminPWord() {
+		return adminPWord;
+	}
 
-    public void setAdminPassword(String adminPassword) {
-        this.adminPassword = adminPassword;
-    }
+	public void setAdminPWord(String adminPWord) {
+		this.adminPWord = adminPWord;
+	}
 
-    @Override
-    public String toString() {
-        return "Admin [adminName=" + adminName + ", adminPassword=" + adminPassword + ", id=" + id + "]";
-    }
+	@Override
+	public String toString() {
+		return "Admin [adminId=" + adminId + ", adminName=" + adminName + ", adminPWord=" + adminPWord + "]";
+	}
+
 }

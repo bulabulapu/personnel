@@ -13,6 +13,13 @@
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context.xsd">
 
+	<!-- 扫描包 -->
+	<context:component-scan
+		base-package="controller"></context:component-scan>
+	<context:component-scan base-package="service"></context:component-scan>
+	<context:component-scan base-package="dao"></context:component-scan>
+
+	<!-- 加载配置文件 -->
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location" value="classpath:jdbc.properties" />
@@ -21,26 +28,26 @@
 	<!-- 配置数据源 -->
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="${driverClassName}" />
-		<property name="url" value="{url}" />
-		<property name="username" value="{username}" />
-		<property name="password" value="{password}" />
+		<property name="driverClassName"
+			value="${driverClassName}" />
+		<property name="url" value="${url}" />
+		<property name="username" value="${username}" />
+		<property name="password" value="${password}" />
 	</bean>
 
-	<!-- 配置并获取sqlSessionFactory -->
-	<bean id="sqlSessionFactory"
+	<!-- 获取sqlSessionFactory -->
+	<bean id="sqlSessionFactoryBean"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="configLocation" value="classpath:mybatis.xml"></property>
 	</bean>
 
-	<!-- 配置并获取SqlSessionTemplate -->
-	<bean id="sqlSessionTemplate"
-		class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg index="0" ref="sqlSessionFactory">
-		</constructor-arg>
+	<!-- mapper代理 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="dao"></property>
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactoryBean"/>
 	</bean>
-	
+
 	<!-- 声明式事务配置： -->
 	<!-- 配置事务管理器 -->
 	<bean id="txManager"
@@ -67,7 +74,4 @@
 			expression="execution(* controller.*.*(..))" id="pointcut" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="pointcut" />
 	</aop:config>
-
-	<context:component-scan
-		base-package="controller" />
 </beans>
