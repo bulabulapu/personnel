@@ -14,14 +14,16 @@ public class AdminServiceImpl implements AdminService {
 	private AdminDao adminDao;
 
 	@Override
-	public String identifyAdmin(Admin admin) {
-		Admin a = adminDao.getAdmin(admin.getAdminId());
-		if (a != null) {
-			if (a.getAdminPWord().equals(admin.getAdminPWord())) {
-				return a.getAdminName();
+	public Admin identifyAdmin(Admin admin) {
+		if (admin != null) {
+			Admin a = adminDao.getAdmin(admin.getAdminId());
+			if (a != null) {
+				if (a.getAdminPWord().equals(admin.getAdminPWord())) {
+					return a;
+				}
 			}
 		}
-		return "";
+		return null;
 	}
 
 }

@@ -7,8 +7,12 @@ import org.springframework.stereotype.Service;
 
 import dao.DepartmentDao;
 import model.Department;
+import model.Staff;
 import service.DepartmentService;
 
+/**
+ * 部门服务接口实现类
+ */
 @Service("departmentService")
 public class DepartmentServiceImpl implements DepartmentService {
 
@@ -16,8 +20,45 @@ public class DepartmentServiceImpl implements DepartmentService {
     private DepartmentDao departmentDao;
 
     @Override
-    public List<Department> getAllDepartment() {
-        return departmentDao.getAllDepartment();
+    public List<Department> queryAllDepartment() {
+        return departmentDao.queryAllDepartment();
     }
 
+    @Override
+    public List<Staff> queryDepartmentStaff(int id) {
+        return departmentDao.queryDepartmentStaff(id);
+    }
+
+    @Override
+    public boolean addDepartment(int id, String name) {
+        Department temp = new Department();
+        temp.setDeId(id);
+        temp.setDeName(name);
+        departmentDao.addDepartment(temp);
+        if (departmentDao.getDepartmentById(id) != null) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean alterDepartment(int id, String newName) {
+        Department temp = new Department();
+        temp.setDeId(id);
+        temp.setDeName(newName);
+        departmentDao.alterDepartment(temp);
+        if (newName.equals(departmentDao.getDepartmentById(id).getDeName())) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deleteDepartment(int id) {
+        departmentDao.deleteDepartment(id);
+        if (departmentDao.getDepartmentById(id) != null) {
+            return false;
+        }
+        return true;
+    }
 }

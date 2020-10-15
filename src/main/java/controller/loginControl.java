@@ -25,19 +25,44 @@ public class loginControl {
 		// Admin admin2 = adminService.getAdmin(admin.getAdminId());
 		// System.out.println(admin2);
 		Admin a = new Admin();
-		a.setAdminId("000000");
+		a.setAdminId("001111");
 		a.setAdminPWord("123456");
-		String result = adminService.identifyAdmin(a);
-		if (result.isEmpty()) {
-			System.out.println("empty");
-		} else {
-			System.out.println(result);
-		}
+		// String result = adminService.identifyAdmin(a);
+		// if (result.isEmpty()) {
+		// 	System.out.println("empty");
+		// } else {
+			// System.out.println(result);
+		// }
 	}
 
 	@RequestMapping(value = "/department")
 	public void departmentTest(HttpServletResponse resp) {
-		System.out.println(departmentService.getAllDepartment());
+		System.out.println(departmentService.queryAllDepartment());
 		System.out.println("ccczxczxczcxz");
+	}
+
+	@RequestMapping(value = "/a")
+	public void testA(HttpServletResponse resp) {
+		System.out.println(departmentService.queryAllDepartment());
+	}
+
+	@RequestMapping(value = "/b")
+	public void testB(HttpServletResponse resp) {
+		System.out.println(departmentService.addDepartment(3,"划水部"));
+	}
+
+	@RequestMapping(value = "/c")
+	public void testC(HttpServletResponse resp) {
+		System.out.println(departmentService.alterDepartment(3,"水"));
+	}
+
+	@RequestMapping(value = "/d")
+	public void testD(HttpServletResponse resp) {
+		System.out.println(departmentService.deleteDepartment(3));
+	}
+
+	@RequestMapping(value = "/e")
+	public void testE(HttpServletResponse resp) {
+		System.out.println(departmentService.queryDepartmentStaff(0));
 	}
 }
