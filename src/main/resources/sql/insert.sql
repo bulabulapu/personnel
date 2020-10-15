@@ -1,3 +1,4 @@
+use personel_db;
 -- 管理员表
 INSERT INTO
     Admin
