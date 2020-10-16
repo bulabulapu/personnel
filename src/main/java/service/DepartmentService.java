@@ -2,6 +2,8 @@ package service;
 
 import java.util.List;
 
+import com.github.pagehelper.PageInfo;
+
 import model.Department;
 import model.Staff;
 
@@ -14,7 +16,7 @@ public interface DepartmentService {
      * 获取所有部门信息
      * @return 部门List
      */
-    public List<Department> queryAllDepartment();
+    public PageInfo<Department> queryAllDepartment();
 
     /**
      * 获取部门员工信息

@@ -5,6 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
 import dao.DepartmentDao;
 import model.Department;
 import model.Staff;
@@ -20,8 +23,11 @@ public class DepartmentServiceImpl implements DepartmentService {
     private DepartmentDao departmentDao;
 
     @Override
-    public List<Department> queryAllDepartment() {
-        return departmentDao.queryAllDepartment();
+    public PageInfo<Department> queryAllDepartment() {
+    	PageHelper.startPage(1, 2);
+    	List<Department> list =  departmentDao.queryAllDepartment();
+    	PageInfo<Department> pageInfo = new PageInfo<>(list);
+        return pageInfo;
     }
 
     @Override

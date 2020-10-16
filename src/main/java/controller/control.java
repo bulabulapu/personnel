@@ -1,28 +1,28 @@
 package controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.github.pagehelper.PageInfo;
+
+import model.Department;
+import service.DepartmentService;
 
 @Controller
 public class control {
 
-	@RequestMapping("/h1")
-	public String result1(HttpServletRequest req, HttpServletResponse resp) {
-		return "forward:/static/hh1.html";
-	}
+	@Autowired
+	private DepartmentService departmentService;
 
-	@RequestMapping("/h2")
-	public String result2(HttpServletRequest req, HttpServletResponse resp) {
-		return "redirect:/static/test.html";
-	}
+	@RequestMapping(value = "department333")
+	@ResponseBody
+	public void result555(int a) {
+		PageInfo<Department> pageInfo = departmentService.queryAllDepartment();
+		System.out.println(pageInfo);
+		System.out.println(pageInfo.getList());
 
-	@RequestMapping(value = "{q}")
-	public String result3(@PathVariable("q") String s) {
-		return "redirect:/static/test.html";
 	}
 
 }
