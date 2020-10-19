@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改岗位信息</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    
+    <script>
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+            if (r != null) return encodeURI(r[2]); return null; //返回参数值
+        }
+      
+        
+        window.onload = function (){
+            var poId = getUrlParam("poId");
+            var url = "../../post/get";
+            
+            var id = document.getElementById("id");
+            var oldName = document.getElementById("oldName");
+            var deName = document.getElementById("deName");
+            var deId = 0;
+            
+            $.post(url,{poId:poId},function (result){	
+                id.value = result.poId;
+                oldName.value = result.poName;
+                deName.value = result.department.deName;
+                deId = result.department.deId;
+            });
+     }
+    </script>
+</head>
+<body>
+<div class="container ">
+    <form class="form-horizontal col-sm-6" action="../../post/alter" method="post" >
+
+
+        <h2>修改岗位信息</h2>
+        <div class="form-group">
+            <label for="id" class="col-sm-2 control-label"><strong>岗位编号</strong></label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="id" name="poId" readonly = "readonly">
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <label for="deName" class="col-sm-2 control-label"><strong>归属部门</strong></label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control"  id="deName" readonly = "readonly">
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <label for="oldName" class="col-sm-2 control-label"><strong>旧岗位名</strong></label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="oldName" readonly="readonly">
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label for="newName" class="col-sm-2 control-label"><strong>新岗位名</strong></label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="newName" name="poName">
+            </div>
+
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default" id = "button_submit">提交</button>
+                <button type="button" class="btn btn-default" onclick="window.location.href='post.html';">返回</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

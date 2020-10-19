@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>人事信息管理</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+
+</head>
+	
+	 <script type="text/javascript">
+        window.onload = function () {
+        	$("#welcom").text("欢迎用户 "+getCookie('adminName'));
+        }
+    </script>
+	
+	<script>
+        function setCookie(cname,cvalue){
+
+            document.cookie = cname+"="+cvalue+"; "
+        }
+        function getCookie(cname){
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0; i<ca.length; i++) {
+                var c = ca[i].trim();
+                if (c.indexOf(name)==0) { return c.substring(name.length,c.length); }
+            }
+            return "";
+        }
+    </script>
+
+<body>
+<div class="container">
+    <p class="h4" id = "welcom" style="color: red;"></p>
+</div>
+<div class="container">
+    <ul class="nav nav-pills">
+        <li role="presentation" ><a href="department.html">部门管理</a></li>
+        <li role="presentation"><a href="post.html">岗位管理</a></li>
+        <li role="presentation"  class="active"><a href="personnel.html">人事信息管理</a></li>
+        <li role="presentation"><a href="staff.html ">员工信息管理</a></li>
+        <li role="presentation"><a href="report.html">报表管理</a></li>
+    </ul>
+</div>
+
+<div class="container">
+    <ul class="nav nav-tabs" >
+        <li role="presentation">
+            <a href="personnelAddStaff.html">员工入职管理</a>
+        </li>
+        <li role="presentation" >
+            <a href="personnelStaff.html" >员工查找及操作</a>
+        </li>
+    </ul>
+</div>
+
+
+</body>
+</html>

@@ -5,26 +5,27 @@ import java.util.List;
 import com.github.pagehelper.PageInfo;
 
 import model.Department;
-import model.Staff;
 
 /**
  * 部门服务接口
  */
 public interface DepartmentService {
+
+    /**
+     * 获取所有部门信息
+     * 
+     * @param page 当前页数
+     * @return 部门分页list
+     */
+    public PageInfo<Department> queryAllDepartment(int page);
     
     /**
      * 获取所有部门信息
-     * @return 部门List
-     */
-    public PageInfo<Department> queryAllDepartment();
-
-    /**
-     * 获取部门员工信息
      * 
-     * @param id 部门id
-     * @return 员工信息List
+     * @return 部门list
      */
-    public List<Staff> queryDepartmentStaff(int id);
+    public List<Department> queryAllDepartmentNoPage();
+    
 
     /**
      * 新建部门
@@ -51,4 +52,19 @@ public interface DepartmentService {
      * @return 完成标志
      */
     public boolean deleteDepartment(int id);
+
+    /**
+     * 检查id是否合法
+     *
+     * @param id
+     * @return 状态
+     */
+    public boolean checkId(int id);
+
+    /**
+     * 获取某个部门信息
+     * @param id 部门id
+     * @return 岗位信息
+     */
+    public Department getDepartment(int id);
 }

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>部门管理</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    	 <script type="text/javascript">
+        window.onload = function () {
+        	$("#welcom").text("欢迎用户 "+getCookie('adminName'));
+        }
+    </script>
+
+<script>
+        function setCookie(cname,cvalue){
+
+            document.cookie = cname+"="+cvalue+"; "
+        }
+        function getCookie(cname){
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0; i<ca.length; i++) {
+                var c = ca[i].trim();
+                if (c.indexOf(name)==0) { return c.substring(name.length,c.length); }
+            }
+            return "";
+        }
+    </script>
+    
+</head>
+
+<body>
+<div class="container">
+    <p class="h4" id = "welcom" style="color: red;"></p>
+</div>
+<div class="container ">
+    <ul class="nav nav-pills">
+        <li role="presentation"><a href="department.html">部门管理</a></li>
+        <li role="presentation"><a href="post.html">岗位管理</a></li>
+        <li role="presentation"><a href="personnel.html">人事信息管理</a></li>
+        <li role="presentation"><a href="staff.html ">员工信息管理</a></li>
+        <li role="presentation" class="active"><a href="report.html">报表管理</a></li>
+    </ul>
+</div>
+<div class="container ">
+
+    <form class="form-horizontal col-sm-6" action="../../report/download">
+        <div>
+
+            <h2>定期报表</label></h2>
+
+            <div class="form-group">
+                <label for="startDay" class="col-sm-2 control-label"><strong>起始日期</strong></label>
+                <div class="col-sm-10">
+                    <input type="date" class="form-control" id="startDay" name="start">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="stopDay" class="col-sm-2 control-label"><strong>*结束日期</strong></label>
+                <div class="col-sm-10">
+                    <input type="date" class="form-control" id="stopDay" name="end">
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label for="type" class="col-sm-2 control-label"><strong>报表类型</strong></label>
+                <div class="col-sm-10">
+                    <select class="form-control" id="type" name="type">
+                        <option value="1">新聘员工信息表</option>
+                        <option value="2">离职员工信息表</option>
+                        <option value="3">部门调动员工信息表</option>
+                        <option value="4">岗位调动员工信息表</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default" id="download_deRport">下载部门定期报表</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    
+    <form class="form-horizontal col-sm-6" action="../../report/monthdownload">
+        <div>
+            <h2>人事月报</label></h2>
+            <div class="form-group">
+                <label for="month" class="col-sm-2 control-label"><strong>月份</strong></label>
+                <div class="col-sm-10">
+                    <input type="month" class="form-control" id="month" name="date">
+                </div>
+
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default" id="download_personnelReport">下载人事月报</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+
+<script>
+    $('#mytab a').click(function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+    })
+</script>
+</body>
+</html>

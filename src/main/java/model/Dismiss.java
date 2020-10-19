@@ -3,7 +3,7 @@ package model;
 /**
  * 离职员工信息类
  */
-public class Dimission {
+public class Dismiss {
 	/* 离职信息id */
 	private int dimId;
 	/* 员工id */

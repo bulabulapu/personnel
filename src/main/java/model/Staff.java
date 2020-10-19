@@ -6,12 +6,12 @@ package model;
 public class Staff {
 	/* 员工编号 */
 	private int staffId;
-	/* 部门编号 */
-	private int poId;
+	/* 岗位 */
+	private Post post;
 	/* 姓名 */
 	private String staffName;
 	/* 性别 */
-	private String sex;
+	private int sex;
 	/* 出生日期 */
 	private String birthday;
 	/* 身份证号 */
@@ -63,12 +63,12 @@ public class Staff {
 		this.staffId = staffId;
 	}
 
-	public int getPoId() {
-		return poId;
+	public Post getPost() {
+		return post;
 	}
 
-	public void setPoId(int poId) {
-		this.poId = poId;
+	public void setPost(Post post) {
+		this.post = post;
 	}
 
 	public String getStaffName() {
@@ -79,11 +79,11 @@ public class Staff {
 		this.staffName = staffName;
 	}
 
-	public String getSex() {
+	public int getSex() {
 		return sex;
 	}
 
-	public void setSex(String sex) {
+	public void setSex(int sex) {
 		this.sex = sex;
 	}
 
@@ -257,14 +257,173 @@ public class Staff {
 
 	@Override
 	public String toString() {
-		return "Staff [birthPlace=" + birthPlace + ", birthday=" + birthday + ", bloodType=" + bloodType + ", college="
-				+ college + ", degree=" + degree + ", education=" + education + ", email=" + email + ", graduationDate="
-				+ graduationDate + ", height=" + height + ", huKou=" + huKou + ", idCard=" + idCard + ", inDay=" + inDay
-				+ ", major=" + major + ", marital=" + marital + ", nation=" + nation + ", nativePlace=" + nativePlace
-				+ ", phone=" + phone + ", poId=" + poId + ", political=" + political + ", sex=" + sex + ", source="
-				+ source + ", staffId=" + staffId + ", staffName=" + staffName + ", workDay=" + workDay + ", workType="
-				+ workType + "]";
+		return "Staff [staffId=" + staffId + ", post=" + post + ", staffName=" + staffName + ", sex=" + sex
+				+ ", birthday=" + birthday + ", idCard=" + idCard + ", inDay=" + inDay + ", workDay=" + workDay
+				+ ", workType=" + workType + ", source=" + source + ", political=" + political + ", nation=" + nation
+				+ ", nativePlace=" + nativePlace + ", phone=" + phone + ", email=" + email + ", height=" + height
+				+ ", bloodType=" + bloodType + ", marital=" + marital + ", birthPlace=" + birthPlace + ", huKou="
+				+ huKou + ", education=" + education + ", degree=" + degree + ", college=" + college + ", major="
+				+ major + ", graduationDate=" + graduationDate + "]";
 	}
 
-	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((birthPlace == null) ? 0 : birthPlace.hashCode());
+		result = prime * result + ((birthday == null) ? 0 : birthday.hashCode());
+		result = prime * result + ((bloodType == null) ? 0 : bloodType.hashCode());
+		result = prime * result + ((college == null) ? 0 : college.hashCode());
+		result = prime * result + ((degree == null) ? 0 : degree.hashCode());
+		result = prime * result + ((education == null) ? 0 : education.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((graduationDate == null) ? 0 : graduationDate.hashCode());
+		result = prime * result + height;
+		result = prime * result + ((huKou == null) ? 0 : huKou.hashCode());
+		result = prime * result + ((idCard == null) ? 0 : idCard.hashCode());
+		result = prime * result + ((inDay == null) ? 0 : inDay.hashCode());
+		result = prime * result + ((major == null) ? 0 : major.hashCode());
+		result = prime * result + ((marital == null) ? 0 : marital.hashCode());
+		result = prime * result + ((nation == null) ? 0 : nation.hashCode());
+		result = prime * result + ((nativePlace == null) ? 0 : nativePlace.hashCode());
+		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
+		result = prime * result + ((political == null) ? 0 : political.hashCode());
+		result = prime * result + ((post == null) ? 0 : post.hashCode());
+		result = prime * result + sex;
+		result = prime * result + ((source == null) ? 0 : source.hashCode());
+		result = prime * result + staffId;
+		result = prime * result + ((staffName == null) ? 0 : staffName.hashCode());
+		result = prime * result + ((workDay == null) ? 0 : workDay.hashCode());
+		result = prime * result + ((workType == null) ? 0 : workType.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Staff other = (Staff) obj;
+		if (birthPlace == null) {
+			if (other.birthPlace != null)
+				return false;
+		} else if (!birthPlace.equals(other.birthPlace))
+			return false;
+		if (birthday == null) {
+			if (other.birthday != null)
+				return false;
+		} else if (!birthday.equals(other.birthday))
+			return false;
+		if (bloodType == null) {
+			if (other.bloodType != null)
+				return false;
+		} else if (!bloodType.equals(other.bloodType))
+			return false;
+		if (college == null) {
+			if (other.college != null)
+				return false;
+		} else if (!college.equals(other.college))
+			return false;
+		if (degree == null) {
+			if (other.degree != null)
+				return false;
+		} else if (!degree.equals(other.degree))
+			return false;
+		if (education == null) {
+			if (other.education != null)
+				return false;
+		} else if (!education.equals(other.education))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (graduationDate == null) {
+			if (other.graduationDate != null)
+				return false;
+		} else if (!graduationDate.equals(other.graduationDate))
+			return false;
+		if (height != other.height)
+			return false;
+		if (huKou == null) {
+			if (other.huKou != null)
+				return false;
+		} else if (!huKou.equals(other.huKou))
+			return false;
+		if (idCard == null) {
+			if (other.idCard != null)
+				return false;
+		} else if (!idCard.equals(other.idCard))
+			return false;
+		if (inDay == null) {
+			if (other.inDay != null)
+				return false;
+		} else if (!inDay.equals(other.inDay))
+			return false;
+		if (major == null) {
+			if (other.major != null)
+				return false;
+		} else if (!major.equals(other.major))
+			return false;
+		if (marital == null) {
+			if (other.marital != null)
+				return false;
+		} else if (!marital.equals(other.marital))
+			return false;
+		if (nation == null) {
+			if (other.nation != null)
+				return false;
+		} else if (!nation.equals(other.nation))
+			return false;
+		if (nativePlace == null) {
+			if (other.nativePlace != null)
+				return false;
+		} else if (!nativePlace.equals(other.nativePlace))
+			return false;
+		if (phone == null) {
+			if (other.phone != null)
+				return false;
+		} else if (!phone.equals(other.phone))
+			return false;
+		if (political == null) {
+			if (other.political != null)
+				return false;
+		} else if (!political.equals(other.political))
+			return false;
+		if (post == null) {
+			if (other.post != null)
+				return false;
+		} else if (!post.equals(other.post))
+			return false;
+		if (sex != other.sex)
+			return false;
+		if (source == null) {
+			if (other.source != null)
+				return false;
+		} else if (!source.equals(other.source))
+			return false;
+		if (staffId != other.staffId)
+			return false;
+		if (staffName == null) {
+			if (other.staffName != null)
+				return false;
+		} else if (!staffName.equals(other.staffName))
+			return false;
+		if (workDay == null) {
+			if (other.workDay != null)
+				return false;
+		} else if (!workDay.equals(other.workDay))
+			return false;
+		if (workType == null) {
+			if (other.workType != null)
+				return false;
+		} else if (!workType.equals(other.workType))
+			return false;
+		return true;
+	}
+
 }

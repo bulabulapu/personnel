@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>员工入职管理</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script>
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+            if (r != null) return encodeURI(r[2]); return null; //返回参数值
+        }
+        window.onload = function (){
+        	var staffId = getUrlParam("staffId");
+        	var url = "../../staff/get";
+        	
+        	var poId = "";
+        	var poName ="";
+        	
+            var staffName = "";
+            var sex = "";
+            var idCard = "";
+            var birthday = "";
+            var inDay = "";
+            var workDay = "";            
+            var workType ="";
+            var source = "";
+            var political = "";
+            var nation = "";
+            var nativePlace = "";
+            var phone = "";
+            var email = "";
+            var height = "";
+            var bloodType = "";
+            var marital = "";
+            var birthPlace = "";
+            var huKou = "";
+            var education = "";
+            var degree ="";
+            var college = "";
+            var major = "";
+            var graduationDate = "";
+        	
+        	$.post(url,{staffId:staffId},function (item){    
+        		
+        		poId = item.post.poId;
+        		poName = item.post.poName;
+        		 
+				staffId = item.staffId;
+                staffName = item.staffName;
+                sex = item.sex==1? "男":"女";
+                idCard = item.idCard;
+                birthday = item.birthday;
+                inDay = item.inDay;
+                workDay = item.workDay; 
+                workType = item.workType;
+                source = item.source;
+                political = item.political;
+                nation = item.nation;
+                nativePlace = item.nativePlace;
+                phone = item.phone;
+                email = item.email;
+                height = item.height;
+                bloodType = item.bloodType;
+                marital = item.marital;
+                birthPlace = item.birthPlace;
+                huKou = item.huKou;
+                education = item.education;
+                degree = item.degree;
+                college = item.college;
+                major = item.major;
+                graduationDate = item.graduationDate;
+              
+             	document.getElementById("staffId").value = staffId;             
+             	document.getElementById("staffName").value =staffName ;
+                document.getElementById("sex").value =sex ;
+                document.getElementById("idCard").value =idCard ;
+                document.getElementById("birthday").value =birthday ;
+                document.getElementById("inDay").value = inDay;
+                document.getElementById("workDay").value =workDay;
+                document.getElementById("poName").value = poName;
+                document.getElementById("workType").value =workType ;
+                document.getElementById("source").value = source;
+                document.getElementById("political").value = political;
+                document.getElementById("nation").value = nation;
+                document.getElementById("nativePlace").value = nativePlace;
+                document.getElementById("phone").value = phone;
+                document.getElementById("email").value =email ;
+                document.getElementById("height").value = height;
+                document.getElementById("bloodType").value =bloodType ;
+                document.getElementById("marital").value =marital ;
+                document.getElementById("birthPlace").value = birthPlace;
+                document.getElementById("huKou").value = huKou;
+                document.getElementById("education").value =education ;
+                document.getElementById("degree").value =degree ;
+                document.getElementById("college").value = college;
+                document.getElementById("major").value = major;
+                document.getElementById("graduationDate").value =graduationDate ;      
+        })
+			var btns2 = document.getElementById("btns2");
+        	btns2.onclick = function(){
+        		
+        		data={
+        				  'post.poId':poId,
+        				  'post.poName':poName,
+        			      staffId : document.getElementById("staffId").value,
+        			      staffName:document.getElementById("staffName").value,
+        			      sex:document.getElementById("sex").value=="男"? 1:0,
+        			      idCard:document.getElementById("idCard").value,
+        			      birthday:document.getElementById("birthday").value,
+        			      inDay:document.getElementById("inDay").value,
+        			      workDay:document.getElementById("workDay").value,
+        			      workType:document.getElementById("workType").value,
+        			      source:document.getElementById("source").value,
+        			      political:document.getElementById("political").value,
+        			      nation:document.getElementById("nation").value,
+        			      nativePlace:document.getElementById("nativePlace").value,
+        			      phone:document.getElementById("phone").value,
+        			      email:document.getElementById("email").value,
+        			      height:document.getElementById("height").value,
+        			      bloodType:document.getElementById("bloodType").value,
+        			      marital:document.getElementById("marital").value,
+        			      birthPlace:document.getElementById("birthPlace").value,
+        			      huKou:document.getElementById("huKou").value,
+        			      education:document.getElementById("education").value,
+        			      degree :document.getElementById("degree").value,
+        			      college :document.getElementById("college").value,
+        			      major:document.getElementById("major").value,
+        			      graduationDate:document.getElementById("graduationDate").value		
+        		};
+        		
+        		$.post("../../staff/alter",data,function(result){
+        			if(result){
+        				alert("修改成功");
+        			}else{
+        				alert("修改失败");
+        			}
+        		});
+        	}
+        	
+        }
+
+    </script>
+</head>
+<body>
+<div class="container ">
+    <form class="form-horizontal col-sm-6" action="../../staff/alter" method="post" >
+
+        <h2>员工信息</h2>
+        
+        <div class="form-group">
+            <label for="staffId" class="col-sm-2 control-label"><strong>*员工号</strong></label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="staffId" name="staffId" readonly="readonly" >
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="staffName" class="col-sm-2 control-label"><strong>*姓名</strong></label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="staffName" name="staffName" >
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="sex" class="col-sm-2 control-label"><strong>*性别</strong></label>
+            <div class="col-sm-10"> 
+          		<input type="text" class="form-control" id="sex" readonly="readonly" name="sex">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="idCard" class="col-sm-2 control-label"><strong>*身份证号</strong></label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="idCard" name="idCard" >
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="birthday" class="col-sm-2 control-label"><strong>*出生日期</strong></label>
+            <div class="col-sm-10">
+                <input type="date" class="form-control" id="birthday" name="birthday">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inDay" class="col-sm-2 control-label"><strong>*入职日期</strong></label>
+            <div class="col-sm-10">
+                <input type="date" class="form-control" id="inDay" name="inDay">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="workDay" class="col-sm-2 control-label"><strong>*参加工作日期</strong></label>
+            <div class="col-sm-10">
+                <input type="date" class="form-control" id="workDay" name="workDay">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="po" class="col-sm-2 control-label"><strong>*岗位</strong></label>
+            <div class="col-sm-10">
+ 				<input type="text" class="form-control" id="poName" readonly="readonly" name="poName">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="workType" class="col-sm-2 control-label"><strong>*用工形式</strong></label>
+            <div class="col-sm-10">
+                <select class="form-control" id="workType" name="workType">
+                    <option >正式员工</option>
+                    <option >临时员工</option>
+                    <option >离职员工</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="source" class="col-sm-2 control-label"><strong>*人员来源</strong></label>
+            <div class="col-sm-10"> 				
+ 				<select class="form-control" id="source" name="source">
+                    <option value="校园招聘">校园招聘</option>
+                    <option value="社会招聘">社会招聘</option>
+                    <option value="其他" >其他</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="political" class="col-sm-2 control-label"><strong>*政治面貌</strong></label>
+            <div class="col-sm-10">
+                <select class="form-control" id="political" name="political">
+                    <option value="党员">党员</option>
+                    <option value="预备党员">预备党员</option>
+                    <option value="团员" >团员</option>
+                    <option value="其他" >其他</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="nation" class="col-sm-2 control-label"><strong>*民族</strong></label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="nation" name="nation">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="nativePlace" class="col-sm-2 control-label"><strong>*籍贯</strong></label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="nativePlace" name="nativePlace">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="phone" class="col-sm-2 control-label"><strong>*联系电话</strong></label>
+            <div class="col-sm-10">
+                <input type="tel" class="form-control" id="phone" name="phone">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="email" class="col-sm-2 control-label"><strong>*电子邮件</strong></label>
+            <div class="col-sm-10">
+                <input type="email" class="form-control" id="email"  name="email" >
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="height" class="col-sm-2 control-label">*身高</label>
+            <div class="input-group col-sm-10">
+                <input type="number" class="form-control" id="height" name="height"  >
+                <div class="input-group-addon">cm</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="bloodType" class="col-sm-2 control-label"><strong>*血型</strong></label>
+            <div class="col-sm-10">
+                <select class="form-control" id="bloodType" name="bloodType">
+                    <option value="A型">A型</option>
+                    <option value="B型">B型</option>
+                    <option value="AB型">AB型</option>
+                    <option value="O型">O型</option>
+                    <option value="其他">其他</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="marital" class="col-sm-2 control-label"><strong>*婚姻状态</strong></label>
+            <div class="col-sm-10">
+                <select class="form-control" id="marital" name="marital">
+                    <option value="未婚">未婚</option>
+                    <option value="已婚">已婚</option>
+                    <option value="离婚">离婚</option>
+                    <option value="丧偶">丧偶</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="birthPlace" class="col-sm-2 control-label"><strong>*出生地</strong></label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="birthPlace" name="birthPlace">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="hukou" class="col-sm-2 control-label"><strong>*户口</strong></label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="huKou" name="huKou" >
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="education" class="col-sm-2 control-label"><strong>*最高学历</strong></label>
+            <div class="col-sm-10">
+                <select class="form-control" id="education" name="education">
+                    <option value="高中及以下">高中及以下</option>
+                    <option value="大专">大专</option>
+                    <option value="本科">本科</option>
+                    <option value="研究生">研究生</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="degree" class="col-sm-2 control-label"><strong>*最高学位</strong></label>
+            <div class="col-sm-10">
+                <select class="form-control" id="degree" name="degree" >
+                    <option value="无学位">无学位</option>
+                    <option value="学士">学士</option>
+                    <option value="硕士">硕士</option>
+                    <option value="博士">博士</option>
+                    <option value="博士后">博士后</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="college" class="col-sm-2 control-label"><strong>*毕业院校</strong></label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="college" name="college">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="major" class="col-sm-2 control-label"><strong>*所学专业</strong></label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="major" name="major" >
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="educationDate" class="col-sm-2 control-label"><strong>*毕业日期</strong></label>
+            <div class="col-sm-10">
+                <input type="date" class="form-control" id="graduationDate" name = "graduationDate">
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="button" class="btn btn-danger" id = "btns2">提交修改</button>
+                <button type="button" class="btn btn-default" onclick="javascript:history.back(-1);">返回</button>
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+
+</body>
+</html>

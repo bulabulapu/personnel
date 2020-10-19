@@ -8,6 +8,10 @@ public class Department {
 	private int deId;
 	/* 部门名称 */
 	private String deName;
+	
+	public Department() {
+		
+	}
 
 	public int getDeId() {
 		return deId;

@@ -13,16 +13,6 @@ import service.DepartmentService;
 @Controller
 public class control {
 
-	@Autowired
-	private DepartmentService departmentService;
-
-	@RequestMapping(value = "department333")
-	@ResponseBody
-	public void result555(int a) {
-		PageInfo<Department> pageInfo = departmentService.queryAllDepartment();
-		System.out.println(pageInfo);
-		System.out.println(pageInfo.getList());
-
-	}
+	
 
 }

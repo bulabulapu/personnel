@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>登录</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script>
+        function isEmpty(obj) {
+            if (typeof obj == "undefined" || obj == null || obj == "") {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        window.onload = function () {
+            var btn = document.getElementById("login");
+            btn.onclick = function () {
+                var adminId = document.getElementById("adminId").value;
+                var adminPWord = document.getElementById("adminPWord").value;
+                if (isEmpty(adminId) || isEmpty(adminPWord)) {
+                    alert("用户名或密码为空！")
+                } else {
+                    var url = "../../login";
+                    var data = {
+                        adminId: adminId,
+                        adminPWord: adminPWord
+                    };
+                    $.post(url, data, function (result) {
+                        var flag = result.flag;
+                        var adminName = result.user.adminName;
+
+                        if (!flag) {
+                            alert("密码错误！");
+                        } else {
+                        	setCookie("adminName",adminName);
+                            window.location.href = "department.html";//成功跳转的页面
+                        }
+
+                    })
+
+                }
+            }
+        }
+    </script>
+    
+    <script>
+        function setCookie(cname,cvalue){
+
+            document.cookie = cname+"="+cvalue+"; "
+        }
+        function getCookie(cname){
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0; i<ca.length; i++) {
+                var c = ca[i].trim();
+                if (c.indexOf(name)==0) { return c.substring(name.length,c.length); }
+            }
+            return "";
+        }
+    </script>
+    
+    
+    
+</head>
+<body background="../images/login.jpg" style=" background-repeat:no-repeat ;background-size:100% 100%;background-attachment: fixed;">
+<div class="container ">
+    <form class="form-horizontal col-sm-6">
+        <h2>登录</h2>
+        <div class="form-group">
+            <label for="adminId" class="col-sm-2 control-label"><strong>账号</strong></label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="adminId">
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label for="adminPWord" class="col-sm-2 control-label"><strong>密码</strong></label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="adminPWord">
+            </div>
+
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="button" class="btn btn-default" id="login">登录</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

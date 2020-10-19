@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>部门调动</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    
+    <script>
+        function isEmpty(obj) {
+            if (typeof obj == "undefined" || obj == null || obj == "") {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
+    
+    <script>
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+            if (r != null) return encodeURI(r[2]);
+            return null; //返回参数值
+        }
+
+        window.onload = function () {
+            var id = getUrlParam("staffId");
+            var url = "../../staff/get";
+
+          	var staffId = document.getElementById("staffId");
+            var staffName = document.getElementById("staffName");
+            var oldDepart = document.getElementById("oldDepart");
+            var newDepart = document.getElementById("newDepart");
+            var oldPost = document.getElementById("oldPost");
+            var newPost = document.getElementById("newPost");
+            var type = document.getElementById("type");
+            var reason = document.getElementById("reason");
+            var remark = document.getElementById("remark");
+            var date = document.getElementById("date");
+            
+            $.post(url, {staffId: id}, function (result) {
+            	staffId.value = result.staffId;
+                staffName.value = result.staffName;
+                oldDepart.value = result.post.department.deName;
+                oldPost.value = result.post.poName;
+            });     
+            
+            newDepart.onfocus=function(){
+                     $.post("../../department/alldepart", {}, function (result) {
+                var data = result;
+                var newHtml = "";
+                for (var i = 0; i < data.length; i++) {
+                    var item = data[i];
+                    var deId = item.deId;
+                    var deName = item.deName;
+                    var tempHtml =
+                        "<option value = '" + deId + "'>" + deName + "</option>\n"
+                    newHtml += tempHtml;
+                }
+                newDepart.innerHTML = newHtml;
+            });   	     	
+        }  
+            newPost.onfocus = function (){
+                var deId = newDepart.value;
+            	if(!isEmpty(deId)){
+            		 $.post("../../post/postbydeid", {deId:deId}, function (result) {
+                         var data = result;
+                         var newHtml = "";
+                         for (var i = 0; i < data.length; i++) {
+                             var item = data[i];
+                             var poId = item.poId;
+                             var poName = item.poName;
+                             var tempHtml =
+                                 "<option value = '" + poId + "'>" + poName + "</option>\n"
+                             newHtml += tempHtml;
+                         }
+                         newPost.innerHTML = newHtml;
+                     });		
+                }
+            }
+            
+            
+            
+            var btns = document.getElementById("btns");
+            btns.onclick = function(){
+            	var data = getData();
+            	$.post("../../transfer/add",data,function(result){
+						if(result){
+							alert("提交成功");
+						}else{
+							alert("提交失败");
+						}           		
+            	});
+            }
+            
+            function getData(){
+            	var data = "";
+            	
+            	var newDepartName= $("#newDepart").find("option:selected").text();
+            	var oldDepartName= $("#oldDepart").find("option:selected").text();
+            	var newPostName= $("#newPost").find("option:selected").text();
+            	var oldPostName= $("#oldPost").find("option:selected").text();
+            	if(oldDepart.value!=newDepartName){  
+            		
+            		data={type:0 , poId:newPost.value,staffId:staffId.value,newDepart:newDepartName,oldDepart:oldDepart.value,deType:type.value,deReson:reason.value,deRemark:remark.value,deDate:date.value};            		  		
+            	}else{
+            		data={type:1,poId:newPost.value,staffId:staffId.value,newPost:newPostName,oldPost:oldPost.value,poType:type.value,poReson:reason.value,poRemark:remark.value,poDate:date.value};
+            	}  
+            	return data;            	
+            }       
+            
+        }
+
+    </script>
+</head>
+<body>
+<div class="container ">
+    <form class="form-horizontal col-sm-6">
+        <h2>部门岗位调动</h2>
+        <div class="form-group">
+            <label for="staffId" class="col-sm-2 control-label"><strong>员工编号</strong></label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="staffId" name="staffId" readonly="readonly">
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label for="staffName" class="col-sm-2 control-label"><strong>员工姓名</strong></label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="staffName" readonly="readonly">
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label for="oldDepart" class="col-sm-2 control-label"><strong>现部门名</strong></label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="oldDepart" readonly="readonly">
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <label for="newDepart" class="col-sm-2 control-label"><strong>新部门名</strong></label>
+            <div class="col-sm-10">
+                <select class="form-control" id="newDepart">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="oldPost" class="col-sm-2 control-label"><strong>现岗位名</strong></label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="oldPost" readonly="readonly">
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label for="newPost" class="col-sm-2 control-label"><strong>新岗位名</strong></label>
+            <div class="col-sm-10">
+                <select class="form-control" id="newPost">
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="type" class="col-sm-2 control-label"><strong>调转类型</strong></label>
+            <div class="col-sm-10">
+                <select class="form-control" id="type">
+                <option value="主动调动">主动调动</option>
+                <option value="被动调动">被动调动</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="reason" class="col-sm-2 control-label"><strong>调转原因</strong></label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="reason" >
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label for="remark" class="col-sm-2 control-label"><strong>调转备注</strong></label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="remark" >
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label for="date" class="col-sm-2 control-label"><strong>*调转日期</strong></label>
+            <div class="col-sm-10">
+                <input type="date" class="form-control" id="date">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="button" class="btn btn-default" id = "btns">提交</button>
+                <button type="button" class="btn btn-default" onclick="javascript:history.back(-1);">返回</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

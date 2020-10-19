@@ -10,7 +10,7 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:AplicationContext.xml</param-value>
 	</context-param>
-
+	
 	<!-- Spring监听器 -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -46,6 +46,6 @@
 	</filter-mapping>
 
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
+		<welcome-file>/static/index.html</welcome-file>
 	</welcome-file-list>
 </web-app>

@@ -10,8 +10,8 @@ import com.github.pagehelper.PageInfo;
 
 import dao.DepartmentDao;
 import model.Department;
-import model.Staff;
 import service.DepartmentService;
+import util.PageUtils;
 
 /**
  * 部门服务接口实现类
@@ -23,28 +23,22 @@ public class DepartmentServiceImpl implements DepartmentService {
     private DepartmentDao departmentDao;
 
     @Override
-    public PageInfo<Department> queryAllDepartment() {
-    	PageHelper.startPage(1, 2);
-    	List<Department> list =  departmentDao.queryAllDepartment();
-    	PageInfo<Department> pageInfo = new PageInfo<>(list);
-        return pageInfo;
-    }
-
-    @Override
-    public List<Staff> queryDepartmentStaff(int id) {
-        return departmentDao.queryDepartmentStaff(id);
+    public PageInfo<Department> queryAllDepartment(int page) {
+        PageHelper.startPage(page, PageUtils.PAGESIZE);
+        return new PageInfo<>(departmentDao.queryAllDepartment());
     }
 
     @Override
     public boolean addDepartment(int id, String name) {
-        Department temp = new Department();
-        temp.setDeId(id);
-        temp.setDeName(name);
-        departmentDao.addDepartment(temp);
-        if (departmentDao.getDepartmentById(id) != null) {
-            return true;
+        try {
+            Department temp = new Department();
+            temp.setDeId(id);
+            temp.setDeName(name);
+            departmentDao.addDepartment(temp);
+            return departmentDao.getDepartmentById(id) != null;
+        } catch (Exception e) {
+            return false;
         }
-        return false;
     }
 
     @Override
@@ -53,18 +47,31 @@ public class DepartmentServiceImpl implements DepartmentService {
         temp.setDeId(id);
         temp.setDeName(newName);
         departmentDao.alterDepartment(temp);
-        if (newName.equals(departmentDao.getDepartmentById(id).getDeName())) {
-            return true;
-        }
-        return false;
+        return newName.equals(departmentDao.getDepartmentById(id).getDeName());
     }
 
     @Override
     public boolean deleteDepartment(int id) {
-        departmentDao.deleteDepartment(id);
-        if (departmentDao.getDepartmentById(id) != null) {
+        try {
+            departmentDao.deleteDepartment(id);
+            return departmentDao.getDepartmentById(id) == null;
+        } catch (Exception e) {
             return false;
         }
-        return true;
     }
+
+    @Override
+    public boolean checkId(int id) {
+        return departmentDao.getDepartmentById(id) == null;
+    }
+
+    @Override
+    public Department getDepartment(int id) {
+        return departmentDao.getDepartmentById(id);
+    }
+
+	@Override
+	public List<Department> queryAllDepartmentNoPage() {
+		return departmentDao.queryAllDepartment();
+	}
 }
